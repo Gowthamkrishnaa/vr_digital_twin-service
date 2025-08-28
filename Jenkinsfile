@@ -47,7 +47,7 @@ pipeline {
 
         stage('Initialize Terraform') {
             steps {
-                sh "terraform init -upgrade -backend-config=./env/${params.Environment}/backend.config"
+                sh "terraform init -upgrade -backend-config=env/${params.Environment}/backend.config"
             }
         }
 
