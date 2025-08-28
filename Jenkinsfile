@@ -17,7 +17,7 @@ pipeline {
                 script {
                     def accountMap = [
                         dev:  '569575870388',
-                        stg:  'TBD',
+                        stg:  '304106858709',
                         prod: 'TBD'
                     ]
                     def aws_account_id = accountMap[params.Environment]
