@@ -99,8 +99,10 @@ resource "aws_ssm_parameter" "digital_twin_service_config" {
   type        = "String"
   tier        = "Standard"
 
-  value = jsonencode({
-    NeptuneWriterEndpoint = aws_neptune_cluster.neptune_cluster.endpoint
-    LambdaWorker          = "NeptuneQueryWorker-${var.stack_suffix}"
-  })
+  value = <<EOT
+{
+ "NeptuneWriterEndpoint":"${aws_neptune_cluster.neptune_cluster.endpoint}",
+ "LambdaWorker":"NeptuneQueryWorker-${var.stack_suffix}"
+}
+EOT
 }
