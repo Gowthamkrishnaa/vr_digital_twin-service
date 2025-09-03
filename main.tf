@@ -92,3 +92,15 @@ resource "aws_neptune_cluster_instance" "neptune_instance" {
     Name = "NeptuneInstance-${var.stack_suffix}"
   }
 }
+
+resource "aws_ssm_parameter" "digital_twin_service_config" {
+  name        = "/${lower(var.stack_suffix)}/config/digital-twin-service"
+  description = "Configuration for Digital Twin Service"
+  type        = "String"
+  tier        = "Standard"
+
+  value = jsonencode({
+    NeptuneWriterEndpoint = aws_neptune_cluster.neptune_cluster.endpoint
+    LambdaWorker          = "NeptuneQueryWorker-${var.stack_suffix}"
+  })
+}
